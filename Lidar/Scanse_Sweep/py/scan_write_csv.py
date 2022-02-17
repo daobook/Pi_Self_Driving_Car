@@ -35,14 +35,13 @@ def write_csv(scans):
 
 def write_json(scans):
     filename = 'one_sample2.json'
-    Sweeps = list()
+    Sweeps = []
     for scan in scans:
 
-        d = dict()
-        d['TimeStamp'] = int(time() * 1000)
-        SensorReading_Angles = list()
-        SensorReading_Radii = list()
-        SensorReading_SignalStrength = list()
+        d = {'TimeStamp': int(time() * 1000)}
+        SensorReading_Angles = []
+        SensorReading_Radii = []
+        SensorReading_SignalStrength = []
         for sample in scan.samples:
             SensorReading_Angles.append(sample.angle / 1000)
             SensorReading_Radii.append(sample.distance)
@@ -52,10 +51,11 @@ def write_json(scans):
         d['SensorReading_SignalStrength'] = SensorReading_SignalStrength
         Sweeps.append(d)
 
-    rs = dict()
-    rs['bSensorIsMobile'] = False
-    rs['bLogTimeStampPerSweep'] = True
-    rs['Sweeps'] = Sweeps
+    rs = {
+        'bSensorIsMobile': False,
+        'bLogTimeStampPerSweep': True,
+        'Sweeps': Sweeps,
+    }
 
     with open(filename, 'w') as fp:
         json.dump(rs, fp)
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         # write_csv(scan)
         # scans = list(islice(sweep.get_scans(), 10))
         scans = []
-        for x in range(0, 21):
+        for _ in range(21):
             scan = scan1.__next__()
             scans.append(scan)
         # write_csv(scans)

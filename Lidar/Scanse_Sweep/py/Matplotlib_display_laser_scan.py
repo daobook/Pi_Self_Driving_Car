@@ -7,6 +7,7 @@
 """
 Matplotlib_display_laser_scan.py:把激光雷达扫描的点云，用matplotlib显示极坐标
 """
+
 from time import sleep
 import numpy as np
 # theta=np.arange(0,2*np.pi,0.02)
@@ -31,13 +32,12 @@ for x in data['Sweeps']:
     for angle, radis in zip(angles, radiss):
         theta = angle / 360 * np.pi * 2
         colors = theta
-        print(radis, theta)
-        # ax1.plot(radis, angle/360, '--', lw=2)
-        ax1.scatter(theta, radis, c=colors, cmap=plt.cm.hsv)
+        print(radis, colors)
+        ax1.scatter(colors, radis, c=colors, cmap=plt.cm.hsv)
         #         sleep(0.5)
         plt.pause(0.00001)#不能取消
-        # plt.show()
-        # break
+            # plt.show()
+            # break
     # plt.clf()
     plt.cla()
 # sleep(1)
